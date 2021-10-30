@@ -27,7 +27,7 @@ def s84Name = 'Feature Flag Local Persistence'
 def s84JarName = 'featureflaglocalpersistence'
 def s84Description = 'Provides a persisted Feature Flag implementation in a Spring service'
 def s84GithubBase = 'https://github.com/service84-io/feature-flag-local-persistence'
-def s84Version = '1.2.1-SNAPSHOT'
+def s84Version = '1.3.0-SNAPSHOT'
 
 // configure all java components to be published
 publishing {
