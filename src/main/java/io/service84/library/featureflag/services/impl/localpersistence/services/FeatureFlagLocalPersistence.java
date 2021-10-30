@@ -19,14 +19,14 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import io.service84.library.featureflag.services.FeatureFlagAPI;
+import io.service84.library.featureflag.services.FeatureFlagAPIBase;
 import io.service84.library.featureflag.services.impl.localpersistence.persistence.model.FlagUserValue;
 import io.service84.library.featureflag.services.impl.localpersistence.persistence.model.FlagValue;
 import io.service84.library.featureflag.services.impl.localpersistence.persistence.repository.FlagUserValueRepository;
 import io.service84.library.featureflag.services.impl.localpersistence.persistence.repository.FlagValueRepository;
 
 @Service("2A94DE64-B0EE-4BD2-B4D0-F845F469C373")
-public class FeatureFlagLocalPersistence implements FeatureFlagAPI {
+public class FeatureFlagLocalPersistence extends FeatureFlagAPIBase {
   @Autowired private FlagValueRepository fvRepository;
   @Autowired private FlagUserValueRepository fuvRepository;
 
@@ -47,6 +47,7 @@ public class FeatureFlagLocalPersistence implements FeatureFlagAPI {
     return defaultValue;
   }
 
+  @Override
   public void setValue(String flag, Boolean value) {
     try {
       setValueHelper(flag, value);
@@ -64,6 +65,7 @@ public class FeatureFlagLocalPersistence implements FeatureFlagAPI {
     fvRepository.saveAndFlush(flagValue);
   }
 
+  @Override
   public void setValue(String flag, String user, Boolean value) {
     try {
       setValueHelper(flag, user, value);
@@ -82,6 +84,7 @@ public class FeatureFlagLocalPersistence implements FeatureFlagAPI {
     fuvRepository.saveAndFlush(flagUserValue);
   }
 
+  @Override
   public void clearValue(String flag) {
     Optional<FlagValue> flagValue = fvRepository.getByFlag(flag);
 
@@ -90,6 +93,7 @@ public class FeatureFlagLocalPersistence implements FeatureFlagAPI {
     }
   }
 
+  @Override
   public void clearValue(String flag, String user) {
     Optional<FlagUserValue> flagUserValue = fuvRepository.getByFlagAndUser(flag, user);
 
