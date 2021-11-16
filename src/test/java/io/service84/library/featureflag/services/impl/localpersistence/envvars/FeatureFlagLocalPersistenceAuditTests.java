@@ -135,7 +135,7 @@ public class FeatureFlagLocalPersistenceAuditTests {
       value = !value;
     }
 
-    FlagUserValue flagUserValue = fuvRepository.getByFlagAndUser(flag, user).get();
+    FlagUserValue flagUserValue = fuvRepository.getByFlagAndUserIdentity(flag, user).get();
     UUID id = getFlagUserValueId(flagUserValue);
     List<Number> revisions = auditReader.getRevisions(FlagUserValue.class, id);
     assertEquals(10, revisions.size());

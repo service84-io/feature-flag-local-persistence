@@ -32,7 +32,7 @@ public class FeatureFlagLocalPersistence extends FeatureFlagAPIBase {
 
   @Override
   public Boolean getFlag(String flag, String user, Boolean defaultValue) {
-    Optional<FlagUserValue> flagUserValue = fuvRepository.getByFlagAndUser(flag, user);
+    Optional<FlagUserValue> flagUserValue = fuvRepository.getByFlagAndUserIdentity(flag, user);
 
     if (flagUserValue.isPresent()) {
       return flagUserValue.get().getValue();
@@ -79,7 +79,7 @@ public class FeatureFlagLocalPersistence extends FeatureFlagAPIBase {
 
   private void setValueHelper(String flag, String user, Boolean value) {
     FlagUserValue flagUserValue =
-        fuvRepository.getByFlagAndUser(flag, user).orElse(new FlagUserValue(flag, user));
+        fuvRepository.getByFlagAndUserIdentity(flag, user).orElse(new FlagUserValue(flag, user));
     flagUserValue.setValue(value);
     fuvRepository.saveAndFlush(flagUserValue);
   }
@@ -95,7 +95,7 @@ public class FeatureFlagLocalPersistence extends FeatureFlagAPIBase {
 
   @Override
   public void clearValue(String flag, String user) {
-    Optional<FlagUserValue> flagUserValue = fuvRepository.getByFlagAndUser(flag, user);
+    Optional<FlagUserValue> flagUserValue = fuvRepository.getByFlagAndUserIdentity(flag, user);
 
     if (flagUserValue.isPresent()) {
       fuvRepository.delete(flagUserValue.get());
