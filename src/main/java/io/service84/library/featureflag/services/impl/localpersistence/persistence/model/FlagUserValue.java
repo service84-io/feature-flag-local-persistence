@@ -49,7 +49,7 @@ public class FlagUserValue {
   private String flag;
 
   @Column(nullable = false, columnDefinition = "VARCHAR(512)")
-  private String user;
+  private String userIdentity;
 
   @Column(nullable = false)
   private Boolean value;
@@ -58,13 +58,13 @@ public class FlagUserValue {
 
   public FlagUserValue(String flag, String user) {
     this.flag = flag;
-    this.user = user;
+    this.userIdentity = user;
     this.value = Boolean.FALSE;
   }
 
   public FlagUserValue(String flag, String user, Boolean value) {
     this.flag = flag;
-    this.user = user;
+    this.userIdentity = user;
     this.value = value;
   }
 
@@ -73,7 +73,7 @@ public class FlagUserValue {
   }
 
   public String getUser() {
-    return user;
+    return userIdentity;
   }
 
   public Boolean getValue() {
