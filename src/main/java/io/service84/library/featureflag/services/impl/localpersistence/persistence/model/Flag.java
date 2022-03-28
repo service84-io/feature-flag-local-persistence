@@ -22,7 +22,6 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.envers.Audited;
@@ -35,7 +34,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @Audited
 @EntityListeners(AuditingEntityListener.class)
-public class FlagValue {
+public class Flag {
   @CreatedBy private String createdBy;
   @CreatedDate private LocalDateTime createdDate;
   @LastModifiedBy private String modifiedBy;
@@ -46,32 +45,16 @@ public class FlagValue {
   @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
   private UUID id;
 
-  @ManyToOne private Flag flag;
+  @Column(unique = true, nullable = false, columnDefinition = "VARCHAR(512)")
+  private String name;
 
-  @Column(nullable = false)
-  private Boolean value;
+  protected Flag() {}
 
-  protected FlagValue() {}
-
-  public FlagValue(Flag flag) {
-    this.flag = flag;
-    this.value = Boolean.FALSE;
+  public Flag(String name) {
+    this.name = name;
   }
 
-  public FlagValue(Flag flag, Boolean value) {
-    this.flag = flag;
-    this.value = value;
-  }
-
-  public Flag getFlag() {
-    return flag;
-  }
-
-  public Boolean getValue() {
-    return value;
-  }
-
-  public void setValue(Boolean value) {
-    this.value = value;
+  public String getName() {
+    return name;
   }
 }

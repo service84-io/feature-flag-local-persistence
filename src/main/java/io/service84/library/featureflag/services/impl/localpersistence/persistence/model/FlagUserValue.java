@@ -22,6 +22,7 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.envers.Audited;
@@ -45,8 +46,7 @@ public class FlagUserValue {
   @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
   private UUID id;
 
-  @Column(unique = true, nullable = false, columnDefinition = "VARCHAR(512)")
-  private String flag;
+  @ManyToOne private Flag flag;
 
   @Column(nullable = false, columnDefinition = "VARCHAR(512)")
   private String userIdentity;
@@ -56,19 +56,19 @@ public class FlagUserValue {
 
   protected FlagUserValue() {}
 
-  public FlagUserValue(String flag, String user) {
+  public FlagUserValue(Flag flag, String user) {
     this.flag = flag;
     this.userIdentity = user;
     this.value = Boolean.FALSE;
   }
 
-  public FlagUserValue(String flag, String user, Boolean value) {
+  public FlagUserValue(Flag flag, String user, Boolean value) {
     this.flag = flag;
     this.userIdentity = user;
     this.value = value;
   }
 
-  public String getFlag() {
+  public Flag getFlag() {
     return flag;
   }
 

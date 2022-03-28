@@ -37,8 +37,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import io.service84.library.featureflag.services.impl.localpersistence.persistence.model.Flag;
 import io.service84.library.featureflag.services.impl.localpersistence.persistence.model.FlagUserValue;
 import io.service84.library.featureflag.services.impl.localpersistence.persistence.model.FlagValue;
+import io.service84.library.featureflag.services.impl.localpersistence.persistence.repository.FlagRepository;
 import io.service84.library.featureflag.services.impl.localpersistence.persistence.repository.FlagUserValueRepository;
 import io.service84.library.featureflag.services.impl.localpersistence.persistence.repository.FlagValueRepository;
 import io.service84.library.featureflag.services.impl.localpersistence.services.FeatureFlagLocalPersistence;
@@ -64,6 +66,7 @@ public class FeatureFlagLocalPersistenceAuditTests {
   }
 
   @Autowired private FeatureFlagLocalPersistence fflpService;
+  @Autowired private FlagRepository flagRepository;
   @Autowired private FlagValueRepository fvRepository;
   @Autowired private FlagUserValueRepository fuvRepository;
   @Autowired private AuditReader auditReader;
@@ -110,14 +113,15 @@ public class FeatureFlagLocalPersistenceAuditTests {
 
   @Test
   public void flagValueVersions() {
-    String flag = UUID.randomUUID().toString();
+    String flagName = UUID.randomUUID().toString();
     Boolean value = Boolean.TRUE;
 
     for (int revision = 0; revision < 10; revision++) {
-      fflpService.setValue(flag, value);
+      fflpService.setValue(flagName, value);
       value = !value;
     }
 
+    Flag flag = flagRepository.getByName(flagName).get();
     FlagValue flagValue = fvRepository.getByFlag(flag).get();
     UUID id = getFlagValueId(flagValue);
     List<Number> revisions = auditReader.getRevisions(FlagValue.class, id);
@@ -126,15 +130,16 @@ public class FeatureFlagLocalPersistenceAuditTests {
 
   @Test
   public void flagUserValueVersions() {
-    String flag = UUID.randomUUID().toString();
+    String flagName = UUID.randomUUID().toString();
     String user = UUID.randomUUID().toString();
     Boolean value = Boolean.TRUE;
 
     for (int revision = 0; revision < 10; revision++) {
-      fflpService.setValue(flag, user, value);
+      fflpService.setValue(flagName, user, value);
       value = !value;
     }
 
+    Flag flag = flagRepository.getByName(flagName).get();
     FlagUserValue flagUserValue = fuvRepository.getByFlagAndUserIdentity(flag, user).get();
     UUID id = getFlagUserValueId(flagUserValue);
     List<Number> revisions = auditReader.getRevisions(FlagUserValue.class, id);

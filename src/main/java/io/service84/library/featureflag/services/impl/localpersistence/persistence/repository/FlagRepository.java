@@ -22,10 +22,8 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import io.service84.library.featureflag.services.impl.localpersistence.persistence.model.Flag;
-import io.service84.library.featureflag.services.impl.localpersistence.persistence.model.FlagValue;
 
-@Repository("F44398EB-73D0-49FB-929C-5C1F69974130")
-public interface FlagValueRepository
-    extends JpaRepository<FlagValue, UUID>, JpaSpecificationExecutor<FlagValue> {
-  Optional<FlagValue> getByFlag(Flag flag);
+@Repository("A7980B33-07F8-438E-BE19-6E25E0988467")
+public interface FlagRepository extends JpaRepository<Flag, UUID>, JpaSpecificationExecutor<Flag> {
+  Optional<Flag> getByName(String name);
 }
