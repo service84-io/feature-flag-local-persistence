@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -34,12 +36,15 @@ import io.service84.library.featureflag.services.impl.localpersistence.persisten
 
 @Service("2A94DE64-B0EE-4BD2-B4D0-F845F469C373")
 public class FeatureFlagLocalPersistence extends FeatureFlagAPIBase {
+  private static final Logger logger = LoggerFactory.getLogger(FeatureFlagLocalPersistence.class);
+
   @Autowired private FlagRepository flagRepository;
   @Autowired private FlagValueRepository fvRepository;
   @Autowired private FlagUserValueRepository fuvRepository;
 
   @Override
   public List<String> getFlags(Integer page, Integer limit) {
+    logger.debug("getFlags");
     Pageable pageable = PageRequest.of(page, limit);
     Page<Flag> flagPage = flagRepository.findAll(pageable);
     List<Flag> flagList = flagPage.getContent();
@@ -49,16 +54,19 @@ public class FeatureFlagLocalPersistence extends FeatureFlagAPIBase {
 
   @Override
   public Boolean getFlag(String flagName, String user, Boolean defaultValue) {
+    logger.debug("getFlag");
     return getValue(flagName, user, defaultValue);
   }
 
   @Override
   public Boolean getValue(String flagName, String user) {
+    logger.debug("getValue");
     return getValue(flagName, user, Boolean.TRUE);
   }
 
   @Override
   public Boolean getValue(String flagName, String user, Boolean defaultValue) {
+    logger.debug("getValue");
     Flag flag = getFlagObject(flagName);
     Optional<FlagUserValue> flagUserValue = fuvRepository.getByFlagAndUserIdentity(flag, user);
 
@@ -77,6 +85,7 @@ public class FeatureFlagLocalPersistence extends FeatureFlagAPIBase {
 
   @Override
   public void setValue(String flagName, Boolean value) {
+    logger.debug("setValue");
     Flag flag = getFlagObject(flagName);
 
     try {
@@ -97,6 +106,7 @@ public class FeatureFlagLocalPersistence extends FeatureFlagAPIBase {
 
   @Override
   public void setValue(String flagName, String user, Boolean value) {
+    logger.debug("setValue");
     Flag flag = getFlagObject(flagName);
 
     try {
@@ -118,6 +128,7 @@ public class FeatureFlagLocalPersistence extends FeatureFlagAPIBase {
 
   @Override
   public void clearValue(String flagName) {
+    logger.debug("clearValue");
     Flag flag = getFlagObject(flagName);
     Optional<FlagValue> flagValue = fvRepository.getByFlag(flag);
 
@@ -128,6 +139,7 @@ public class FeatureFlagLocalPersistence extends FeatureFlagAPIBase {
 
   @Override
   public void clearValue(String flagName, String user) {
+    logger.debug("clearValue");
     Flag flag = getFlagObject(flagName);
     Optional<FlagUserValue> flagUserValue = fuvRepository.getByFlagAndUserIdentity(flag, user);
 
