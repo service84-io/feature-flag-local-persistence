@@ -31,6 +31,7 @@ versions are (built-tested)
     com.fasterxml.jackson.core:jackson-databind:(2.0.0-2.11.4)
     org.hibernate:hibernate-envers:(5.0.0.Final-5.4.27.Final)
     org.slf4j:slf4j-api:(1.3.0-1.7.30)
+    io.service84.library:standardpersistence:(1.2.0-1.2.0)
 
 ## Build
 This is a Java 11 project that builds best with Gradle 6.3
