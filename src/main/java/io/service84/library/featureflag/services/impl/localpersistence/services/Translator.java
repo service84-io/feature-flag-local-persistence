@@ -14,7 +14,9 @@ import io.service84.library.standardpersistence.services.PaginationTranslator;
 
 @Service("5E062AC0-FC15-41FB-83C1-58D190563938")
 public class Translator extends PaginationTranslator {
-  private static class FFLPFlagPage extends FlagPage implements PaginationDataStandard {}
+  public static class FFLPFlagPage extends FlagPage implements PaginationDataStandard {
+    public FFLPFlagPage() {}
+  }
 
   private static final Logger logger = LoggerFactory.getLogger(FeatureFlagLocalPersistence.class);
 
