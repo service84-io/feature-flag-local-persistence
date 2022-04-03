@@ -80,6 +80,7 @@ public class FeatureFlagLocalPersistenceAuditTests {
 
   @Test
   public void exists() {
+    assertNotNull(translator);
     assertNotNull(fflpService);
     assertNotNull(fvRepository);
     assertNotNull(fuvRepository);
