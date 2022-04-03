@@ -14,18 +14,16 @@
 
 package io.service84.library.featureflag.services.impl.localpersistence.services;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import io.service84.library.featureflag.model.FlagPage;
 import io.service84.library.featureflag.services.FeatureFlagAPIBase;
 import io.service84.library.featureflag.services.impl.localpersistence.persistence.model.Flag;
 import io.service84.library.featureflag.services.impl.localpersistence.persistence.model.FlagUserValue;
@@ -38,18 +36,17 @@ import io.service84.library.featureflag.services.impl.localpersistence.persisten
 public class FeatureFlagLocalPersistence extends FeatureFlagAPIBase {
   private static final Logger logger = LoggerFactory.getLogger(FeatureFlagLocalPersistence.class);
 
+  @Autowired private Translator translator;
   @Autowired private FlagRepository flagRepository;
   @Autowired private FlagValueRepository fvRepository;
   @Autowired private FlagUserValueRepository fuvRepository;
 
   @Override
-  public List<String> getFlags(Integer page, Integer limit) {
+  public FlagPage getFlags(String cursor, Integer limit) {
     logger.debug("getFlags");
-    Pageable pageable = PageRequest.of(page, limit);
+    Pageable pageable = translator.getPageable(cursor, limit);
     Page<Flag> flagPage = flagRepository.findAll(pageable);
-    List<Flag> flagList = flagPage.getContent();
-    List<String> flags = flagList.stream().map(f -> f.getName()).collect(Collectors.toList());
-    return flags;
+    return translator.translateFlagPage(flagPage);
   }
 
   @Override
