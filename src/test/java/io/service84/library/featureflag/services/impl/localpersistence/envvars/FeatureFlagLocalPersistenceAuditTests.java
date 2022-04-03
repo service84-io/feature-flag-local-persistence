@@ -44,6 +44,7 @@ import io.service84.library.featureflag.services.impl.localpersistence.persisten
 import io.service84.library.featureflag.services.impl.localpersistence.persistence.repository.FlagUserValueRepository;
 import io.service84.library.featureflag.services.impl.localpersistence.persistence.repository.FlagValueRepository;
 import io.service84.library.featureflag.services.impl.localpersistence.services.FeatureFlagLocalPersistence;
+import io.service84.library.featureflag.services.impl.localpersistence.services.Translator;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
@@ -63,8 +64,14 @@ public class FeatureFlagLocalPersistenceAuditTests {
     public FeatureFlagLocalPersistence getKeyValueService() {
       return new FeatureFlagLocalPersistence();
     }
+
+    @Bean
+    public Translator getTranslator() {
+      return new Translator();
+    }
   }
 
+  @Autowired private Translator translator;
   @Autowired private FeatureFlagLocalPersistence fflpService;
   @Autowired private FlagRepository flagRepository;
   @Autowired private FlagValueRepository fvRepository;

@@ -43,6 +43,11 @@ public class FeatureFlagLocalPersistenceTests {
     public FeatureFlagLocalPersistence getKeyValueService() {
       return new FeatureFlagLocalPersistence();
     }
+
+    @Bean
+    public Translator getTranslator() {
+      return new Translator();
+    }
   }
 
   // Test Subject
