@@ -30,6 +30,7 @@ versions are (built-tested)
     org.hibernate:hibernate-core:(5.0.0.Final-5.4.27.Final)
     com.fasterxml.jackson.core:jackson-databind:(2.0.0-2.11.4)
     org.hibernate:hibernate-envers:(5.0.0.Final-5.4.27.Final)
+    org.apache.commons:commons-lang3:(3.0-3.11)
     org.slf4j:slf4j-api:(1.3.0-1.7.30)
     io.service84.library:standardpersistence:(1.2.0-1.2.0)
 

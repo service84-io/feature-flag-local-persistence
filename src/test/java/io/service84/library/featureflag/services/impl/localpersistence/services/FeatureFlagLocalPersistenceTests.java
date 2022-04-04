@@ -29,6 +29,8 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import io.service84.library.featureflag.model.FlagPage;
+
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
 public class FeatureFlagLocalPersistenceTests {
@@ -129,5 +131,15 @@ public class FeatureFlagLocalPersistenceTests {
     fflpService.clearValue(flag);
     Boolean gotValue = fflpService.getFlag(flag, user, defaultValue);
     assertEquals(defaultValue, gotValue);
+  }
+
+  @Test
+  public void createFlag() {
+    String flag = UUID.randomUUID().toString();
+    FlagPage initialGotFlags = fflpService.getFlags(null, Integer.MAX_VALUE);
+    assertFalse(initialGotFlags.getFlags().contains(flag));
+    fflpService.createFlag(flag);
+    FlagPage gotFlags = fflpService.getFlags(null, Integer.MAX_VALUE);
+    assertTrue(gotFlags.getFlags().contains(flag));
   }
 }

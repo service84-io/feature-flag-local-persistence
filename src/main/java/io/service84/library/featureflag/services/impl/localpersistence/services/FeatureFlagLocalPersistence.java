@@ -42,6 +42,12 @@ public class FeatureFlagLocalPersistence extends FeatureFlagAPIBase {
   @Autowired private FlagUserValueRepository fuvRepository;
 
   @Override
+  public void createFlag(String flagName) {
+    logger.debug("createFlag");
+    getFlagObject(flagName);
+  }
+
+  @Override
   public FlagPage getFlags(String cursor, Integer limit) {
     logger.debug("getFlags");
     Pageable pageable = translator.getPageable(cursor, limit);
