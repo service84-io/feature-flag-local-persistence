@@ -142,4 +142,59 @@ public class FeatureFlagLocalPersistenceTests {
     FlagPage gotFlags = fflpService.getFlags(null, Integer.MAX_VALUE);
     assertTrue(gotFlags.getFlags().contains(flag));
   }
+
+  @Test
+  public void setValueCreatesFlag() {
+    String flag = UUID.randomUUID().toString();
+    Boolean value = Boolean.TRUE;
+    FlagPage initialGotFlags = fflpService.getFlags(null, Integer.MAX_VALUE);
+    assertFalse(initialGotFlags.getFlags().contains(flag));
+    fflpService.setValue(flag, value);
+    FlagPage gotFlags = fflpService.getFlags(null, Integer.MAX_VALUE);
+    assertTrue(gotFlags.getFlags().contains(flag));
+  }
+
+  @Test
+  public void clearValueCreatesFlag() {
+    String flag = UUID.randomUUID().toString();
+    FlagPage initialGotFlags = fflpService.getFlags(null, Integer.MAX_VALUE);
+    assertFalse(initialGotFlags.getFlags().contains(flag));
+    fflpService.clearValue(flag);
+    FlagPage gotFlags = fflpService.getFlags(null, Integer.MAX_VALUE);
+    assertTrue(gotFlags.getFlags().contains(flag));
+  }
+
+  @Test
+  public void getValueCreatesFlag() {
+    String flag = UUID.randomUUID().toString();
+    String user = UUID.randomUUID().toString();
+    FlagPage initialGotFlags = fflpService.getFlags(null, Integer.MAX_VALUE);
+    assertFalse(initialGotFlags.getFlags().contains(flag));
+    fflpService.getValue(flag, user);
+    FlagPage gotFlags = fflpService.getFlags(null, Integer.MAX_VALUE);
+    assertTrue(gotFlags.getFlags().contains(flag));
+  }
+
+  @Test
+  public void setUserValueCreatesFlag() {
+    String flag = UUID.randomUUID().toString();
+    String user = UUID.randomUUID().toString();
+    Boolean value = Boolean.TRUE;
+    FlagPage initialGotFlags = fflpService.getFlags(null, Integer.MAX_VALUE);
+    assertFalse(initialGotFlags.getFlags().contains(flag));
+    fflpService.setValue(flag, user, value);
+    FlagPage gotFlags = fflpService.getFlags(null, Integer.MAX_VALUE);
+    assertTrue(gotFlags.getFlags().contains(flag));
+  }
+
+  @Test
+  public void clearUserValueCreatesFlag() {
+    String flag = UUID.randomUUID().toString();
+    String user = UUID.randomUUID().toString();
+    FlagPage initialGotFlags = fflpService.getFlags(null, Integer.MAX_VALUE);
+    assertFalse(initialGotFlags.getFlags().contains(flag));
+    fflpService.clearValue(flag, user);
+    FlagPage gotFlags = fflpService.getFlags(null, Integer.MAX_VALUE);
+    assertTrue(gotFlags.getFlags().contains(flag));
+  }
 }
