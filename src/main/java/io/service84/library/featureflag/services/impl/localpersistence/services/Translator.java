@@ -16,6 +16,16 @@ import io.service84.library.standardpersistence.services.PaginationTranslator;
 public class Translator extends PaginationTranslator {
   public static class FFLPFlagPage extends FlagPage implements PaginationDataStandard {
     public FFLPFlagPage() {}
+
+    @Override
+    public void setIndex(String index) {
+      super.setCursor(index);
+    }
+
+    @Override
+    public void setNextIndex(String nextIndex) {
+      super.setNextCursor(nextIndex);
+    }
   }
 
   private static final Logger logger = LoggerFactory.getLogger(FeatureFlagLocalPersistence.class);
