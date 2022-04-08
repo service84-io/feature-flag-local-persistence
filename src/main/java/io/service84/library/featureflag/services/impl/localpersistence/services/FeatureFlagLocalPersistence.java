@@ -55,6 +55,10 @@ public class FeatureFlagLocalPersistence extends FeatureFlagAPIBase {
     return translator.translateFlagPage(flagPage);
   }
 
+  /*
+   * @deprecated Use getValue instead
+   */
+  @Deprecated(since = "1.3.0")
   @Override
   public Boolean getFlag(String flagName, String user, Boolean defaultValue) {
     logger.debug("getFlag");
