@@ -130,6 +130,13 @@ public class FeatureFlagLocalPersistence extends FeatureFlagAPIBase {
   }
 
   @Override
+  public void clearAllUserValues(String flagName) {
+    logger.debug("clearAllUserValues");
+    Flag flag = getFlagObject(flagName);
+    fuvRepository.deleteByFlag(flag);
+  }
+
+  @Override
   public void clearValue(String flagName) {
     logger.debug("clearValue");
     Flag flag = getFlagObject(flagName);

@@ -28,4 +28,6 @@ import io.service84.library.featureflag.services.impl.localpersistence.persisten
 public interface FlagUserValueRepository
     extends JpaRepository<FlagUserValue, UUID>, JpaSpecificationExecutor<FlagUserValue> {
   Optional<FlagUserValue> getByFlagAndUserIdentity(Flag flag, String user);
+
+  void deleteByFlag(Flag flag);
 }

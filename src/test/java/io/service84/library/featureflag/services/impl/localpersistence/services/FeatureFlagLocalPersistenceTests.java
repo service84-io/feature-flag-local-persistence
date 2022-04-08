@@ -166,6 +166,19 @@ public class FeatureFlagLocalPersistenceTests {
   }
 
   @Test
+  public void clearAllUserOverride() {
+    String flag = UUID.randomUUID().toString();
+    String user = UUID.randomUUID().toString();
+    Boolean flagValue = Boolean.TRUE;
+    Boolean userValue = !flagValue;
+    fflpService.setValue(flag, user, userValue);
+    fflpService.setValue(flag, flagValue);
+    fflpService.clearAllUserValues(flag);
+    Boolean gotValue = fflpService.getValue(flag, user);
+    assertEquals(flagValue, gotValue);
+  }
+
+  @Test
   public void clearFlagValue() {
     String flag = UUID.randomUUID().toString();
     String user = UUID.randomUUID().toString();
