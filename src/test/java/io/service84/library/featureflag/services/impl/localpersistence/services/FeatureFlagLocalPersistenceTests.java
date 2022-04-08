@@ -77,6 +77,30 @@ public class FeatureFlagLocalPersistenceTests {
   }
 
   @Test
+  public void getValueDefaultFalse() {
+    String flag = UUID.randomUUID().toString();
+    String user = UUID.randomUUID().toString();
+    Boolean value = fflpService.getValue(flag, user, Boolean.FALSE);
+    assertFalse(value);
+  }
+
+  @Test
+  public void getValueDefaultTrue() {
+    String flag = UUID.randomUUID().toString();
+    String user = UUID.randomUUID().toString();
+    Boolean value = fflpService.getValue(flag, user, Boolean.TRUE);
+    assertTrue(value);
+  }
+
+  @Test
+  public void getValueDefaultImplicit() {
+    String flag = UUID.randomUUID().toString();
+    String user = UUID.randomUUID().toString();
+    Boolean value = fflpService.getValue(flag, user);
+    assertTrue(value);
+  }
+
+  @Test
   public void setAndGetFlagTrue() {
     String flag = UUID.randomUUID().toString();
     String user = UUID.randomUUID().toString();
@@ -97,6 +121,26 @@ public class FeatureFlagLocalPersistenceTests {
   }
 
   @Test
+  public void setAndGetValueTrue() {
+    String flag = UUID.randomUUID().toString();
+    String user = UUID.randomUUID().toString();
+    Boolean value = Boolean.TRUE;
+    fflpService.setValue(flag, value);
+    Boolean gotValue = fflpService.getValue(flag, user, Boolean.TRUE);
+    assertEquals(value, gotValue);
+  }
+
+  @Test
+  public void setAndGetValueFalse() {
+    String flag = UUID.randomUUID().toString();
+    String user = UUID.randomUUID().toString();
+    Boolean value = Boolean.FALSE;
+    fflpService.setValue(flag, value);
+    Boolean gotValue = fflpService.getValue(flag, user, Boolean.TRUE);
+    assertEquals(value, gotValue);
+  }
+
+  @Test
   public void userOverride() {
     String flag = UUID.randomUUID().toString();
     String user = UUID.randomUUID().toString();
@@ -104,7 +148,7 @@ public class FeatureFlagLocalPersistenceTests {
     Boolean userValue = !flagValue;
     fflpService.setValue(flag, user, userValue);
     fflpService.setValue(flag, flagValue);
-    Boolean gotValue = fflpService.getFlag(flag, user, Boolean.TRUE);
+    Boolean gotValue = fflpService.getValue(flag, user);
     assertEquals(userValue, gotValue);
   }
 
@@ -117,7 +161,7 @@ public class FeatureFlagLocalPersistenceTests {
     fflpService.setValue(flag, user, userValue);
     fflpService.setValue(flag, flagValue);
     fflpService.clearValue(flag, user);
-    Boolean gotValue = fflpService.getFlag(flag, user, Boolean.TRUE);
+    Boolean gotValue = fflpService.getValue(flag, user);
     assertEquals(flagValue, gotValue);
   }
 
@@ -129,7 +173,7 @@ public class FeatureFlagLocalPersistenceTests {
     Boolean defaultValue = !value;
     fflpService.setValue(flag, value);
     fflpService.clearValue(flag);
-    Boolean gotValue = fflpService.getFlag(flag, user, defaultValue);
+    Boolean gotValue = fflpService.getValue(flag, user, defaultValue);
     assertEquals(defaultValue, gotValue);
   }
 
