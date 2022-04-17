@@ -37,12 +37,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.service84.library.featureflag.services.impl.localpersistence.persistence.model.Flag;
-import io.service84.library.featureflag.services.impl.localpersistence.persistence.model.FlagUserValue;
-import io.service84.library.featureflag.services.impl.localpersistence.persistence.model.FlagValue;
-import io.service84.library.featureflag.services.impl.localpersistence.persistence.repository.FlagRepository;
-import io.service84.library.featureflag.services.impl.localpersistence.persistence.repository.FlagUserValueRepository;
-import io.service84.library.featureflag.services.impl.localpersistence.persistence.repository.FlagValueRepository;
+import io.service84.library.featureflag.services.impl.localpersistence.persistence.models.Flag;
+import io.service84.library.featureflag.services.impl.localpersistence.persistence.models.FlagUserValue;
+import io.service84.library.featureflag.services.impl.localpersistence.persistence.models.FlagValue;
+import io.service84.library.featureflag.services.impl.localpersistence.persistence.repositories.FlagRepository;
+import io.service84.library.featureflag.services.impl.localpersistence.persistence.repositories.FlagUserValueRepository;
+import io.service84.library.featureflag.services.impl.localpersistence.persistence.repositories.FlagValueRepository;
 import io.service84.library.featureflag.services.impl.localpersistence.services.FeatureFlagLocalPersistence;
 import io.service84.library.featureflag.services.impl.localpersistence.services.Translator;
 
