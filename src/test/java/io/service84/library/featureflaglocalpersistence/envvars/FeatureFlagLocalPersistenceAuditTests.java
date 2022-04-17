@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package io.service84.library.featureflag.services.impl.localpersistence.envvars;
+package io.service84.library.featureflaglocalpersistence.envvars;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -37,14 +37,14 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.service84.library.featureflag.services.impl.localpersistence.persistence.models.Flag;
-import io.service84.library.featureflag.services.impl.localpersistence.persistence.models.FlagUserValue;
-import io.service84.library.featureflag.services.impl.localpersistence.persistence.models.FlagValue;
-import io.service84.library.featureflag.services.impl.localpersistence.persistence.repositories.FlagRepository;
-import io.service84.library.featureflag.services.impl.localpersistence.persistence.repositories.FlagUserValueRepository;
-import io.service84.library.featureflag.services.impl.localpersistence.persistence.repositories.FlagValueRepository;
-import io.service84.library.featureflag.services.impl.localpersistence.services.FeatureFlagLocalPersistence;
-import io.service84.library.featureflag.services.impl.localpersistence.services.Translator;
+import io.service84.library.featureflaglocalpersistence.persistence.models.Flag;
+import io.service84.library.featureflaglocalpersistence.persistence.models.FlagUserValue;
+import io.service84.library.featureflaglocalpersistence.persistence.models.FlagValue;
+import io.service84.library.featureflaglocalpersistence.persistence.repositories.FlagRepository;
+import io.service84.library.featureflaglocalpersistence.persistence.repositories.FlagUserValueRepository;
+import io.service84.library.featureflaglocalpersistence.persistence.repositories.FlagValueRepository;
+import io.service84.library.featureflaglocalpersistence.services.FeatureFlagLocalPersistence;
+import io.service84.library.featureflaglocalpersistence.services.Translator;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest

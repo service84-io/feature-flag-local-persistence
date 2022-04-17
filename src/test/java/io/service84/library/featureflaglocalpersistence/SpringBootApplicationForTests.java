@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package io.service84.library.featureflag.services.impl.localpersistence;
+package io.service84.library.featureflaglocalpersistence;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

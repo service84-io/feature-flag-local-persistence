@@ -1,4 +1,4 @@
-package io.service84.library.featureflag.services.impl.localpersistence.services;
+package io.service84.library.featureflaglocalpersistence.services;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,7 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import io.service84.library.featureflag.model.FlagPage;
-import io.service84.library.featureflag.services.impl.localpersistence.persistence.models.Flag;
+import io.service84.library.featureflaglocalpersistence.persistence.models.Flag;
 import io.service84.library.standardpersistence.services.PaginationTranslator;
 
 @Service("5E062AC0-FC15-41FB-83C1-58D190563938")

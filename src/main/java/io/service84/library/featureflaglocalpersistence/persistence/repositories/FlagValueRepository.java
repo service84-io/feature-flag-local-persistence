@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package io.service84.library.featureflag.services.impl.localpersistence.persistence.repositories;
+package io.service84.library.featureflaglocalpersistence.persistence.repositories;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -21,8 +21,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
-import io.service84.library.featureflag.services.impl.localpersistence.persistence.models.Flag;
-import io.service84.library.featureflag.services.impl.localpersistence.persistence.models.FlagValue;
+import io.service84.library.featureflaglocalpersistence.persistence.models.Flag;
+import io.service84.library.featureflaglocalpersistence.persistence.models.FlagValue;
 
 @Repository("F44398EB-73D0-49FB-929C-5C1F69974130")
 public interface FlagValueRepository

@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package io.service84.library.featureflag.services.impl.localpersistence.services;
+package io.service84.library.featureflaglocalpersistence.services;
 
 import java.util.Optional;
 
@@ -25,12 +25,12 @@ import org.springframework.stereotype.Service;
 
 import io.service84.library.featureflag.model.FlagPage;
 import io.service84.library.featureflag.services.FeatureFlagAPIBase;
-import io.service84.library.featureflag.services.impl.localpersistence.persistence.models.Flag;
-import io.service84.library.featureflag.services.impl.localpersistence.persistence.models.FlagUserValue;
-import io.service84.library.featureflag.services.impl.localpersistence.persistence.models.FlagValue;
-import io.service84.library.featureflag.services.impl.localpersistence.persistence.repositories.FlagRepository;
-import io.service84.library.featureflag.services.impl.localpersistence.persistence.repositories.FlagUserValueRepository;
-import io.service84.library.featureflag.services.impl.localpersistence.persistence.repositories.FlagValueRepository;
+import io.service84.library.featureflaglocalpersistence.persistence.models.Flag;
+import io.service84.library.featureflaglocalpersistence.persistence.models.FlagUserValue;
+import io.service84.library.featureflaglocalpersistence.persistence.models.FlagValue;
+import io.service84.library.featureflaglocalpersistence.persistence.repositories.FlagRepository;
+import io.service84.library.featureflaglocalpersistence.persistence.repositories.FlagUserValueRepository;
+import io.service84.library.featureflaglocalpersistence.persistence.repositories.FlagValueRepository;
 
 @Service("2A94DE64-B0EE-4BD2-B4D0-F845F469C373")
 public class FeatureFlagLocalPersistence extends FeatureFlagAPIBase {

@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package io.service84.library.featureflag.services.impl.localpersistence.services;
+package io.service84.library.featureflaglocalpersistence.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -30,6 +30,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import io.service84.library.featureflag.model.FlagPage;
+import io.service84.library.featureflaglocalpersistence.services.FeatureFlagLocalPersistence;
+import io.service84.library.featureflaglocalpersistence.services.Translator;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest

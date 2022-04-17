@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package io.service84.library.featureflag.services.impl.localpersistence.persistence.repositories;
+package io.service84.library.featureflaglocalpersistence.persistence.repositories;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -21,9 +21,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
-import io.service84.library.featureflag.services.impl.localpersistence.persistence.models.Flag;
+import io.service84.library.featureflaglocalpersistence.persistence.models.Flag;
+import io.service84.library.featureflaglocalpersistence.persistence.models.FlagUserValue;
 
-@Repository("A7980B33-07F8-438E-BE19-6E25E0988467")
-public interface FlagRepository extends JpaRepository<Flag, UUID>, JpaSpecificationExecutor<Flag> {
-  Optional<Flag> getByName(String name);
+@Repository("3FDAD111-5D35-4E5A-9C07-53EC70C83BED")
+public interface FlagUserValueRepository
+    extends JpaRepository<FlagUserValue, UUID>, JpaSpecificationExecutor<FlagUserValue> {
+  Optional<FlagUserValue> getByFlagAndUserIdentity(Flag flag, String user);
+
+  void deleteByFlag(Flag flag);
 }

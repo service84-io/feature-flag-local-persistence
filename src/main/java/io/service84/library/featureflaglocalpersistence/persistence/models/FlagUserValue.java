@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package io.service84.library.featureflag.services.impl.localpersistence.persistence.models;
+package io.service84.library.featureflaglocalpersistence.persistence.models;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -35,7 +35,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @Audited
 @EntityListeners(AuditingEntityListener.class)
-public class FlagValue {
+public class FlagUserValue {
   @CreatedBy private String createdBy;
   @CreatedDate private LocalDateTime createdDate;
   @LastModifiedBy private String modifiedBy;
@@ -48,23 +48,32 @@ public class FlagValue {
 
   @ManyToOne private Flag flag;
 
+  @Column(nullable = false, columnDefinition = "VARCHAR(512)")
+  private String userIdentity;
+
   @Column(nullable = false)
   private Boolean value;
 
-  protected FlagValue() {}
+  protected FlagUserValue() {}
 
-  public FlagValue(Flag flag) {
+  public FlagUserValue(Flag flag, String user) {
     this.flag = flag;
+    this.userIdentity = user;
     this.value = Boolean.FALSE;
   }
 
-  public FlagValue(Flag flag, Boolean value) {
+  public FlagUserValue(Flag flag, String user, Boolean value) {
     this.flag = flag;
+    this.userIdentity = user;
     this.value = value;
   }
 
   public Flag getFlag() {
     return flag;
+  }
+
+  public String getUser() {
+    return userIdentity;
   }
 
   public Boolean getValue() {

@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package io.service84.library.featureflag.services.impl.localpersistence.persistence.models;
+package io.service84.library.featureflaglocalpersistence.persistence.models;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
