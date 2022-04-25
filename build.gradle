@@ -12,9 +12,12 @@
 
 plugins {
   id 'com.diffplug.eclipse.apt' version '3.22.0'
+  // id 'org.springframework.boot' version '2.2.4.RELEASE'
+  // id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+  // id 'org.openapi.generator' version '4.2.3'
+  id 'java-library'
   id 'maven-publish'
   id 'signing'
-  id 'java-library'
   id 'eclipse'
   id 'java'
 }
@@ -145,6 +148,14 @@ project.plugins.withType(MavenPublishPlugin).all {
 
 sourceCompatibility = 11.0
 
+sourceSets {
+  main {
+    java {
+      srcDir 'gen/main/java'
+    }
+  }
+}
+
 repositories {
   jcenter()
   mavenCentral()
@@ -203,12 +214,36 @@ dependencies {
   annotationProcessor 'org.hibernate:hibernate-jpamodelgen:5.4.27.Final'
 }
 
+test {
+  useJUnitPlatform()
+}
+
+////////////////////////////////
+//Download Dependencies/////////
+////////////////////////////////
+task downloadDependencies {
+  doLast {
+    project.rootProject.allprojects.each { project ->
+      project.buildscript.configurations.each { configuration ->
+        if (configuration.canBeResolved) {
+          configuration.resolve()
+        }
+      }
+
+      project.configurations.each { configuration ->
+        if (configuration.canBeResolved) {
+          configuration.resolve()
+        }
+      }
+    }
+  }
+}
+
+////////////////////////////////
+//Generate Metamodel////////////
+////////////////////////////////
 eclipse {
   synchronizationTasks eclipseFactorypath
   synchronizationTasks eclipseJdt
   synchronizationTasks eclipseJdtApt
-}
-
-test {
-  useJUnitPlatform()
 }
