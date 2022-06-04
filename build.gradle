@@ -194,7 +194,7 @@ dependencies {
 
   compileOnly 'org.slf4j:slf4j-api:1.3.0'
 
-  api 'io.service84.library:featureflagapi:1.3.50-SNAPSHOT'
+  api 'io.service84.library:featureflagapi:1.3.50'
   compileOnly 'io.service84.library:standardpersistence:1.2.0'
 
   ////////////////////////////////
@@ -215,7 +215,7 @@ dependencies {
   testRuntimeOnly 'org.apache.commons:commons-lang3:3.11'
 
   // This fulfils the S84StandardPersistence 1.2+ requirement
-  testRuntimeOnly 'io.service84.library:standardpersistence:1.3.50-SNAPSHOT'
+  testRuntimeOnly 'io.service84.library:standardpersistence:1.3.50'
 
   testRuntimeOnly 'com.h2database:h2:1.4.200'
 
